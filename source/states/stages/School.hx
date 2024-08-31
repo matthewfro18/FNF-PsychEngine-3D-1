@@ -43,6 +43,14 @@ class School extends BaseStage
 {
 	var view:ModelView;
 
+	private var dad:Character3D;
+	private var gf:Character3D;
+	private var boyfriend:Boyfriend3D;
+
+	public var boyfriendGroup:FlxSpriteGroup;
+	public var dadGroup:FlxSpriteGroup;
+	public var gfGroup:FlxSpriteGroup;
+
 	override function create()
 	{
 		var _song = PlayState.SONG;
@@ -109,6 +117,9 @@ class School extends BaseStage
 		else
 			dad = new Character3D(view, 'senpai', false)
 
+		gf = new Character3D(0, 0, SONG.player3);
+		startCharacterPos(gf, true);
+		gfGroup.add(gf);
 
 		dad = new Character3D(0, 0, SONG.player2);
 		startCharacterPos(dad, true);
