@@ -246,6 +246,26 @@ class Paths
 		return 'assets/fonts/$key';
 	}
 
+	inline static public function obj(key:String) {
+		return getPath('models/$key.obj');
+	}
+
+	inline static public function dae(key:String) {
+		return getPath('models/$key.dae');
+	}
+
+	inline static public function md2(key:String) {
+		return getPath('models/$key.md2');
+	}
+
+	inline static public function md5(key:String) {
+		return getPath('models/$key.md5');
+	}
+
+	inline static public function awd(key:String) {
+		return getPath('models/$key.awd');
+	}
+
 	public static function fileExists(key:String, type:AssetType, ?ignoreMods:Bool = false, ?parentFolder:String = null)
 	{
 		#if MODS_ALLOWED
