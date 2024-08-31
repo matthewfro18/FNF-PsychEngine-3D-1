@@ -95,7 +95,28 @@ class School extends BaseStage
 				view.view.y = FlxG.stage.stageHeight / 2 - FlxG.scaleMode.gameSize.y / 2;
 			}
 
-		setDefaultGF('gf-pixel');
+
+		if (SONG.song.toLowerCase() == 'fuzzy-logic')
+			gf = new Character3D(view, '', false);
+		else
+			gf = new Character3D(view, 'gf', false);
+
+		// dad = new Character(100, 100, SONG.player2);
+		if (SONG.song.toLowerCase() == 'fuzzy-logic')
+			dad = new Character3D(view, 'hydra', false);
+		else if (SONG.song.toLowerCase() == 'roses')
+			dad = new Character3D(view, 'senpai-angry', false);
+		else
+			dad = new Character3D(view, 'senpai', false)
+
+
+		dad = new Character3D(0, 0, SONG.player2);
+		startCharacterPos(dad, true);
+		dadGroup.add(dad);
+
+		boyfriend = new Character3D(0, 0, SONG.player1, true);
+		startCharacterPos(boyfriend);
+		boyfriendGroup.add(boyfriend);
 
 		switch (songName)
 		{
