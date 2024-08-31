@@ -41,6 +41,14 @@ class TVStage extends BaseStage
 
 	var tv:TVModel;
 
+	private var dad:Character3D;
+	private var gf:Character3D;
+	private var boyfriend:Boyfriend3D;
+
+	public var boyfriendGroup:FlxSpriteGroup;
+	public var dadGroup:FlxSpriteGroup;
+	public var gfGroup:FlxSpriteGroup;
+
 	public static var loadEvents:Bool = true;
 
 	override function create()
@@ -76,6 +84,9 @@ class TVStage extends BaseStage
 		else
 			dad = new Character3D(view, 'senpai', false)
 
+		gf = new Character3D(0, 0, SONG.player3);
+		startCharacterPos(gf, true);
+		gfGroup.add(gf);
 
 		dad = new Character3D(0, 0, SONG.player2);
 		startCharacterPos(dad, true);
