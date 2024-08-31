@@ -35,7 +35,7 @@ import openfl.net.URLRequest;
 import away3d.events.Asset3DEvent;
 import away3d.library.Asset3DLibrary;
 
-class Template extends BaseStage
+class TVStage extends BaseStage
 {
 	var view:ModelView;
 
