@@ -1,5 +1,25 @@
 package states.editors;
 
+#if THREE_D_SUPPORT
+import away3d.debug.Debug;
+import away3d.events.Stage3DEvent;
+
+import openfl.display3D.textures.TextureBase;
+import openfl.display3D.Context3D;
+import openfl.display3D.Context3DClearMask;
+import openfl.display3D.Context3DRenderMode;
+import openfl.display3D.IndexBuffer3D;
+import openfl.display3D.Program3D;
+import openfl.display3D.VertexBuffer3D;
+import openfl.display.Shape;
+import openfl.display.Stage3D;
+import openfl.errors.Error;
+import openfl.events.Event;
+import openfl.events.EventDispatcher;
+import openfl.geom.Rectangle;
+import openfl.Vector;
+#end
+
 import backend.StageData;
 import backend.PsychCamera;
 import objects.Character;
@@ -23,6 +43,60 @@ import states.editors.content.PreloadListSubState;
 
 class StageEditorState extends MusicBeatState implements PsychUIEventHandler.PsychUIEvent
 {
+	public var profile(get, never):String;
+	public var enableDepthAndStencil(get, set):Bool;
+	public var renderTarget(get, never):TextureBase;
+	public var renderSurfaceSelector(get, never):Int;
+	public var scissorRect(get, set):Rectangle;
+	public var stage3DIndex(get, never):Int;
+	public var stage3D(get, never):Stage3D;
+	public var context3D(get, never):Context3D;
+	public var driverInfo(get, never):String;
+	public var usesSoftwareRendering(get, never):Bool;
+	public var x(get, set):Float;
+	public var y(get, set):Float;
+	public var width(get, set):Int;
+	public var height(get, set):Int;
+	public var antiAlias(get, set):Int;
+	public var viewPort(get, never):Rectangle;
+	public var color(get, set):Int;
+	public var visible(get, set):Bool;
+	public var bufferClear(get, set):Bool;
+	public var mouse3DManager(get, set):Mouse3DManager;
+	public var touch3DManager(get, set):Touch3DManager;
+
+	private static var _frameEventDriver:Shape = new Shape();
+
+	@:allow(away3d) private var _context3D:Context3D;
+	@:allow(away3d) private var _stage3DIndex:Int = -1;
+
+	private var _usesSoftwareRendering:Bool;
+	private var _profile:String;
+	private var _stage3D:Stage3D;
+	private var _activeProgram3D:Program3D;
+	private var _stage3DManager:Stage3DManager;
+	private var _backBufferWidth:Int;
+	private var _backBufferHeight:Int;
+	private var _antiAlias:Int;
+	private var _enableDepthAndStencil:Bool;
+	private var _backBufferEnableDepthAndStencil:Bool = true;
+	private var _contextRequested:Bool;
+	//private var _activeVertexBuffers : Vector.<VertexBuffer3D> = new Vector.<VertexBuffer3D>(8, true);
+	//private var _activeTextures : Vector.<TextureBase> = new Vector.<TextureBase>(8, true);
+	private var _renderTarget:TextureBase;
+	private var _renderSurfaceSelector:Int;
+	private var _scissorRect:Rectangle;
+	private var _color:Int;
+	private var _backBufferDirty:Bool;
+	private var _viewPort:Rectangle;
+	private var _enterFrame:Event;
+	private var _exitFrame:Event;
+	private var _viewportUpdated:Stage3DEvent;
+	private var _viewportDirty:Bool;
+	private var _bufferClear:Bool;
+	private var _mouse3DManager:Mouse3DManager;
+	private var _touch3DManager:Touch3DManager;
+
 	final minZoom = 0.1;
 	final maxZoom = 2;
 
