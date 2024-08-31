@@ -8,7 +8,8 @@ import openfl.utils.Assets as OpenFlAssets;
 
 class School extends BaseStage
 {
-	var bgGirls:BackgroundGirls;
+	var view:ModelView;
+
 	override function create()
 	{
 		var _song = PlayState.SONG;
@@ -17,60 +18,50 @@ class School extends BaseStage
 		if(_song.gameOverEnd == null || _song.gameOverEnd.trim().length < 1) GameOverSubstate.endSoundName = 'gameOverEnd-pixel';
 		if(_song.gameOverChar == null || _song.gameOverChar.trim().length < 1) GameOverSubstate.characterName = 'bf-pixel-dead';
 
-		var bgSky:BGSprite = new BGSprite('weeb/weebSky', 0, 0, 0.1, 0.1);
-		add(bgSky);
-		bgSky.antialiasing = false;
+			view = new ModelView(1, 0, 1, 1, 6000, ClientPrefs.lowRes);
 
-		var repositionShit = -200;
+			view.view.visible = false;
 
-		var bgSchool:BGSprite = new BGSprite('weeb/weebSchool', repositionShit, 0, 0.6, 0.90);
-		add(bgSchool);
-		bgSchool.antialiasing = false;
+			curStage = 'school';
 
-		var bgStreet:BGSprite = new BGSprite('weeb/weebStreet', repositionShit, 0, 0.95, 0.95);
-		add(bgStreet);
-		bgStreet.antialiasing = false;
+			LoadingCount.expand(2);
 
-		var widShit = Std.int(bgSky.width * PlayState.daPixelZoom);
-		if(!ClientPrefs.data.lowQuality) {
-			var fgTrees:BGSprite = new BGSprite('weeb/weebTreesBack', repositionShit + 170, 130, 0.9, 0.9);
-			fgTrees.setGraphicSize(Std.int(widShit * 0.8));
-			fgTrees.updateHitbox();
-			add(fgTrees);
-			fgTrees.antialiasing = false;
-		}
+			view.distance = 370;
+			view.setCamLookAt(0, 90, 0);
 
-		var bgTrees:FlxSprite = new FlxSprite(repositionShit - 380, -800);
-		bgTrees.frames = Paths.getPackerAtlas('weeb/weebTrees');
-		bgTrees.animation.add('treeLoop', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18], 12);
-		bgTrees.animation.play('treeLoop');
-		bgTrees.scrollFactor.set(0.85, 0.85);
-		add(bgTrees);
-		bgTrees.antialiasing = false;
+			Asset3DLibrary.enableParser(AWDParser);
+			Asset3DLibrary.addEventListener(Asset3DEvent.ASSET_COMPLETE, onAssetComplete);
+			Asset3DLibrary.load(new URLRequest("assets/models/school.awd"));
+			Asset3DLibrary.load(new URLRequest("assets/models/petal.awd"));
 
-		if(!ClientPrefs.data.lowQuality) {
-			var treeLeaves:BGSprite = new BGSprite('weeb/petals', repositionShit, -40, 0.85, 0.85, ['PETALS ALL'], true);
-			treeLeaves.setGraphicSize(widShit);
-			treeLeaves.updateHitbox();
-			add(treeLeaves);
-			treeLeaves.antialiasing = false;
-		}
+			skyboxTex = new BitmapCubeTexture(Cast.bitmapData("assets/models/skybox/px.png"), Cast.bitmapData("assets/models/skybox/nx.png"),
+				Cast.bitmapData("assets/models/skybox/py.png"), Cast.bitmapData("assets/models/skybox/ny.png"),
+				Cast.bitmapData("assets/models/skybox/pz.png"), Cast.bitmapData("assets/models/skybox/nz.png"));
 
-		bgSky.setGraphicSize(widShit);
-		bgSchool.setGraphicSize(widShit);
-		bgStreet.setGraphicSize(widShit);
-		bgTrees.setGraphicSize(Std.int(widShit * 1.4));
+			skybox = new SkyBox(skyboxTex);
+			view.view.scene.addChild(skybox);
+			if (ClientPrefs.lowRes)
+			{
+				view.sprite.cameras = [camUnderHUD];
+				add(view.sprite);
+				var lowest = Math.min(FlxG.width / view.sprite.width, FlxG.height / view.sprite.height);
+				view.sprite.scale.set(lowest, lowest);
+				view.sprite.updateHitbox();
+				view.sprite.screenCenter(XY);
+				lowRes = true;
+				// camUnderHUD.setFilters([new BlurFilter(2, 2, BitmapFilterQuality.LOW), new ShaderFilter(new Scanlines())]);
+				view.sprite.shader = new PSXShader();
+				view.view.x = FlxG.stage.stageWidth;
+				view.view.y = FlxG.stage.stageHeight;
+			}
+			else
+			{
+				view.view.width = FlxG.scaleMode.gameSize.x;
+				view.view.height = FlxG.scaleMode.gameSize.y;
+				view.view.x = FlxG.stage.stageWidth / 2 - FlxG.scaleMode.gameSize.x / 2;
+				view.view.y = FlxG.stage.stageHeight / 2 - FlxG.scaleMode.gameSize.y / 2;
+			}
 
-		bgSky.updateHitbox();
-		bgSchool.updateHitbox();
-		bgStreet.updateHitbox();
-		bgTrees.updateHitbox();
-
-		if(!ClientPrefs.data.lowQuality) {
-			bgGirls = new BackgroundGirls(-100, 190);
-			bgGirls.scrollFactor.set(0.9, 0.9);
-			add(bgGirls);
-		}
 		setDefaultGF('gf-pixel');
 
 		switch (songName)
