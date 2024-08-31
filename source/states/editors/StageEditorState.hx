@@ -1,25 +1,5 @@
 package states.editors;
 
-#if THREE_D_SUPPORT
-import away3d.debug.Debug;
-import away3d.events.Stage3DEvent;
-
-import openfl.display3D.textures.TextureBase;
-import openfl.display3D.Context3D;
-import openfl.display3D.Context3DClearMask;
-import openfl.display3D.Context3DRenderMode;
-import openfl.display3D.IndexBuffer3D;
-import openfl.display3D.Program3D;
-import openfl.display3D.VertexBuffer3D;
-import openfl.display.Shape;
-import openfl.display.Stage3D;
-import openfl.errors.Error;
-import openfl.events.Event;
-import openfl.events.EventDispatcher;
-import openfl.geom.Rectangle;
-import openfl.Vector;
-#end
-
 import backend.StageData;
 import backend.PsychCamera;
 import objects.Character;
@@ -550,11 +530,10 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 
 		var btnY = 320;
 		var btn:PsychUIButton = new PsychUIButton(0, btnY, '3d model', function() ModelView(''));
-			var view:ModelView = new ModelView();
-			view.updateHitbox();
-			view.screenCenter();
-			veiw.insert(view);
-		});
+		var view:ModelView = new ModelView();
+		view.updateHitbox();
+		view.screenCenter();
+		veiw.insert(view);
 		btn.screenCenter(X);
 		createPopup.add(btn);
 	}
