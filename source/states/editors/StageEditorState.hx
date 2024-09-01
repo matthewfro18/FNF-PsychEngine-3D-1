@@ -533,7 +533,7 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 
 		var btnY = 320;
 		var btn:PsychUIButton = new PsychUIButton(0, btnY, '3d model', function() ModelView(''));
-		var view:ModelView = new ModelView();
+		view:ModelView = new ModelView();
 		view.updateHitbox();
 		view.screenCenter();
 		veiw.insert(view);
