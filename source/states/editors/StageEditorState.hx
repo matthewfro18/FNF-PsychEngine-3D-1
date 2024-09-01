@@ -32,6 +32,9 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 	var stageJson:StageFile;
 
 	var camGame:FlxCamera;
+
+	var view:ModelView;
+
 	public var camHUD:FlxCamera;
 
 	var UI_stagebox:PsychUIBox;
