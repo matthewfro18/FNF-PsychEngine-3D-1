@@ -75,6 +75,13 @@
       "dir": null,
       "ref": "master",
       "url": "https://github.com/superpowers04/linc_luajit"
+    },
+    {
+      "name": "away3d",
+      "type": "git",
+      "dir": null,
+      "ref": "master",
+      "url": "https://github.com/FNF-CNE-Devs/away3dt"
     }
   ]
 }
