@@ -532,15 +532,6 @@ class StageEditorState extends MusicBeatState implements PsychUIEventHandler.Psy
 		createPopup.add(btn);
 		add(createPopup);
 		createPopup.visible = createPopup.active = false;
-
-		var btnY = 320;
-		var btn:PsychUIButton = new PsychUIButton(0, btnY, '3d model', function() ModelView(''));
-		view:ModelView = new ModelView();
-		view.updateHitbox();
-		view.screenCenter();
-		veiw.insert(view);
-		btn.screenCenter(X);
-		createPopup.add(btn);
 	}
 	
 	function updateSpriteListRadio()
