@@ -2,38 +2,6 @@ package states.stages;
 
 import states.stages.objects.*;
 import lime.app.Application;
-import away3d.core.base.ParticleGeometry;
-import away3d.loaders.parsers.AWDParser;
-import flixel.util.FlxDestroyUtil;
-import haxe.Json;
-import flixel.FlxState;
-import away3d.textures.BitmapCubeTexture;
-import away3d.textures.BitmapTexture;
-import away3d.primitives.SkyBox;
-import away3d.materials.MaterialBase;
-import openfl.geom.Vector3D;
-import away3d.animators.data.ParticleProperties;
-import away3d.animators.data.ParticlePropertiesMode;
-import away3d.animators.data.ParticlePropertiesMode;
-import away3d.animators.data.ParticlePropertiesMode;
-import away3d.animators.data.ParticlePropertiesMode;
-import away3d.materials.ColorMaterial;
-import away3d.tools.helpers.ParticleGeometryHelper;
-import away3d.animators.ParticleAnimator;
-import away3d.animators.nodes.ParticleRotationalVelocityNode;
-import away3d.animators.nodes.ParticleRotateToPositionNode;
-import away3d.animators.nodes.ParticleVelocityNode;
-import away3d.animators.nodes.ParticlePositionNode;
-import away3d.animators.ParticleAnimationSet;
-import openfl.Vector;
-import away3d.core.base.Geometry;
-import away3d.entities.Mesh;
-import away3d.utils.Cast;
-import away3d.materials.TextureMaterial;
-import away3d.library.assets.Asset3DType;
-import openfl.net.URLRequest;
-import away3d.events.Asset3DEvent;
-import away3d.library.Asset3DLibrary;
 
 class TVStage extends BaseStage
 {
