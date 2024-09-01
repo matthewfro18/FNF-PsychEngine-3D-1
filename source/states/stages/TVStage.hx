@@ -3,7 +3,7 @@ package states.stages;
 import states.stages.objects.*;
 import substates.GameOverSubstate;
 import cutscenes.DialogueBox;
-import objects.Character3D
+import objects.Character3D;
 import lime.app.Application;
 
 class TVStage extends BaseStage
