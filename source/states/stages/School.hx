@@ -115,7 +115,7 @@ class School extends BaseStage
 		else if (SONG.song.toLowerCase() == 'roses')
 			dad = new Character3D(view, 'senpai-angry', false);
 		else
-			dad = new Character3D(view, 'senpai', false)
+			dad = new Character3D(view, 'senpai', false);
 
 		gf = new Character3D(0, 0, SONG.player3);
 		startCharacterPos(gf, true);
