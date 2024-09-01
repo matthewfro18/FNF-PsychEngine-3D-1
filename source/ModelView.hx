@@ -19,6 +19,7 @@ import away3d.materials.lightpickers.*;
 import away3d.materials.methods.*;
 import away3d.primitives.*;
 import away3d.utils.Cast;
+import away3d.containers.View3D;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.graphics.FlxGraphic;
